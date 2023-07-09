@@ -17,6 +17,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
       ),
       body: Stack(
         children: [
+          backgroundScreen(context),
           Container(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
@@ -24,31 +25,31 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                 children: [
                   TextFormField(
                     onChanged: (value) {},
-                    decoration: AppInputDecoration("Product Name"),
+                    decoration: appInputDecoration("Product Name"),
                   ),
                   const SizedBox(height: 20),
 
                   TextFormField(
                     onChanged: (value) {},
-                    decoration: AppInputDecoration("Product Code"),
+                    decoration: appInputDecoration("Product Code"),
                   ),
                   const SizedBox(height: 20),
 
                   TextFormField(
                     onChanged: (value) {},
-                    decoration: AppInputDecoration("Product Image Url"),
+                    decoration: appInputDecoration("Product Image Url"),
                   ),
                   const SizedBox(height: 20),
 
                   TextFormField(
                     onChanged: (value) {},
-                    decoration: AppInputDecoration("Unit Price"),
+                    decoration: appInputDecoration("Unit Price"),
                   ),
                   const SizedBox(height: 20),
 
                   TextFormField(
                     onChanged: (value) {},
-                    decoration: AppInputDecoration("Total Price"),
+                    decoration: appInputDecoration("Total Price"),
                   ),
                   const SizedBox(height: 20),
                 ],

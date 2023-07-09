@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 const colorRed = Color.fromRGBO(231, 28, 36, 1);
 const colorGreen = Color.fromRGBO(33, 191, 115, 1);
 const colorWhite = Color.fromRGBO(255,255, 255, 1);
 const colorDarkBlue = Color.fromRGBO(231, 28, 36, 1);
 
-InputDecoration AppInputDecoration(label){
+InputDecoration appInputDecoration(label){
   return InputDecoration(
     border: const OutlineInputBorder(),
     focusedBorder: const OutlineInputBorder(
@@ -18,5 +19,14 @@ InputDecoration AppInputDecoration(label){
     ),
     contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
     labelText: label,
+  );
+}
+
+SvgPicture backgroundScreen(context){
+  return SvgPicture.asset(
+    "assets/images/backgroundImg3.svg",
+    alignment: Alignment.center,fit: BoxFit.fill,
+    height: MediaQuery.of(context).size.height,
+    width: MediaQuery.of(context).size.width,
   );
 }
