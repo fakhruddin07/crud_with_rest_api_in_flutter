@@ -9,6 +9,23 @@ class ProductCreateScreen extends StatefulWidget {
 }
 
 class _ProductCreateScreenState extends State<ProductCreateScreen> {
+
+  Map<String, String> formValues = {
+    "Img":"",
+    "ProductCode":"",
+    "ProductName":"",
+    "Qty":"",
+    "TotalPrice":"",
+    "UnitPrice":""
+  };
+
+  inputOnChange(productKey, productValue){
+    formValues.update(productKey, (value) => productValue);
+    if(mounted){
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,23 +41,29 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
               child: Column(
                 children: [
                   TextFormField(
-                    onChanged: (value) {},
+                    onChanged: (productValue) {
+                      inputOnChange("ProductName", productValue);
+                    },
                     decoration: appInputDecoration("Product Name"),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    onChanged: (value) {},
+                    onChanged: (productValue) {
+                      inputOnChange("ProductCode", productValue);
+                    },
                     decoration: appInputDecoration("Product Code"),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    onChanged: (value) {},
+                    onChanged: (productValue) {
+                      inputOnChange("Img", productValue);
+                    },
                     decoration: appInputDecoration("Product Image Url"),
                   ),
                   const SizedBox(height: 20),
                   dropDownStyle(
                     DropdownButton(
-                      value: "",
+                      value: formValues["Qty"],
                       isExpanded: true,
                       underline: Container(),
                       items: [
@@ -65,17 +88,23 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                           value: "4 pcs",
                         ),
                       ],
-                      onChanged: (value) {},
+                      onChanged: (productValue) {
+                        inputOnChange("Qty", productValue);
+                      },
                     ),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    onChanged: (value) {},
+                    onChanged: (productValue) {
+                      inputOnChange("UnitPrice", productValue);
+                    },
                     decoration: appInputDecoration("Unit Price"),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    onChanged: (value) {},
+                    onChanged: (productValue) {
+                      inputOnChange("TotalPrice", productValue);
+                    },
                     decoration: appInputDecoration("Total Price"),
                   ),
                   const SizedBox(height: 20),
