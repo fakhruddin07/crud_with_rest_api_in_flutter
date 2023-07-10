@@ -42,57 +42,62 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : GridView.builder(
-                  itemCount: productsList.length,
-                  gridDelegate: productGridViewStyle(),
-                  itemBuilder: (context, index) {
-                    return Card(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Expanded(
-                            child: Image.network(
-                              productsList[index]["Img"],
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(productsList[index]["ProductName"]),
-                                const SizedBox(width: 10),
-                                Text(
-                                    "Price: ${productsList[index]["UnitPrice"]} BDT"),
-                                Row(
-                                  children: [
-                                    OutlinedButton(
-                                      onPressed: () {},
-                                      child: const Icon(
-                                        Icons.edit,
-                                        size: 18,
-                                        color: colorGreen,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    OutlinedButton(
-                                      onPressed: () {},
-                                      child: const Icon(
-                                        Icons.delete,
-                                        size: 18,
-                                        color: colorRed,
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    await callData();
                   },
+                  child: GridView.builder(
+                    itemCount: productsList.length,
+                    gridDelegate: productGridViewStyle(),
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Expanded(
+                              child: Image.network(
+                                productsList[index]["Img"],
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(5, 5, 5, 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(productsList[index]["ProductName"]),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                      "Price: ${productsList[index]["UnitPrice"]} BDT"),
+                                  Row(
+                                    children: [
+                                      OutlinedButton(
+                                        onPressed: () {},
+                                        child: const Icon(
+                                          Icons.edit,
+                                          size: 18,
+                                          color: colorGreen,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 5),
+                                      OutlinedButton(
+                                        onPressed: () {},
+                                        child: const Icon(
+                                          Icons.delete,
+                                          size: 18,
+                                          color: colorRed,
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 )
         ],
       ),
