@@ -1,5 +1,6 @@
+import 'package:crud_with_rest_api_in_flutter/Screen/product_create_screen.dart';
+import 'package:crud_with_rest_api_in_flutter/Screen/product_update_screen.dart';
 import 'package:crud_with_rest_api_in_flutter/Style/style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../RESTAPI/rest_client.dart';
@@ -44,9 +45,9 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
               child: const Text("No"),
             ),
             TextButton(
-              onPressed: () async{
+              onPressed: () async {
                 Navigator.pop(context);
-                isLoading= true;
+                isLoading = true;
                 setState(() {});
                 await productDeleteRequest(id);
                 await callData();
@@ -59,11 +60,31 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
     );
   }
 
+  goToUpdateProduct(context, productItem){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>  ProductUpdateScreen(productItem),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("List Product"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ProductCreateScreen(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
       body: Stack(
         children: [
@@ -102,7 +123,9 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
                                   Row(
                                     children: [
                                       OutlinedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          goToUpdateProduct(context, productsList[index]);
+                                        },
                                         child: const Icon(
                                           Icons.edit,
                                           size: 18,

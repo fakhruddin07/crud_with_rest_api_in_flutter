@@ -67,90 +67,86 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
       body: Stack(
         children: [
           backgroundScreen(context),
-          isLoading ? const Center(child: CircularProgressIndicator()): Container(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  TextFormField(
+          isLoading ? const Center(child: CircularProgressIndicator()): SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                TextFormField(
+                  onChanged: (productValue) {
+                    inputOnChange("ProductName", productValue);
+                  },
+                  decoration: appInputDecoration("Product Name"),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  onChanged: (productValue) {
+                    inputOnChange("ProductCode", productValue);
+                  },
+                  decoration: appInputDecoration("Product Code"),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  onChanged: (productValue) {
+                    inputOnChange("Img", productValue);
+                  },
+                  decoration: appInputDecoration("Product Image Url"),
+                ),
+                const SizedBox(height: 20),
+                dropDownStyle(
+                  DropdownButton(
+                    value: formValues["Qty"],
+                    isExpanded: true,
+                    underline: Container(),
+                    items: const [
+                      DropdownMenuItem(
+                        value: "0",
+                        child: Text("Select Qty"),
+                      ),
+                      DropdownMenuItem(
+                        value: "1 pcs",
+                        child: Text("1 pcs"),
+                      ),
+                      DropdownMenuItem(
+                        value: "2 pcs",
+                        child: Text("2 pcs"),
+                      ),
+                      DropdownMenuItem(
+                        value: "3 pcs",
+                        child: Text("3 pcs"),
+                      ),
+                      DropdownMenuItem(
+                        value: "4 pcs",
+                        child: Text("4 pcs"),
+                      ),
+                    ],
                     onChanged: (productValue) {
-                      inputOnChange("ProductName", productValue);
+                      inputOnChange("Qty", productValue);
                     },
-                    decoration: appInputDecoration("Product Name"),
                   ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    onChanged: (productValue) {
-                      inputOnChange("ProductCode", productValue);
-                    },
-                    decoration: appInputDecoration("Product Code"),
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    onChanged: (productValue) {
-                      inputOnChange("Img", productValue);
-                    },
-                    decoration: appInputDecoration("Product Image Url"),
-                  ),
-                  const SizedBox(height: 20),
-                  dropDownStyle(
-                    DropdownButton(
-                      value: formValues["Qty"],
-                      isExpanded: true,
-                      underline: Container(),
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Select Qty"),
-                          value: "",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("1 pcs"),
-                          value: "1 pcs",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("2 pcs"),
-                          value: "2 pcs",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("3 pcs"),
-                          value: "3 pcs",
-                        ),
-                        DropdownMenuItem(
-                          child: Text("4 pcs"),
-                          value: "4 pcs",
-                        ),
-                      ],
-                      onChanged: (productValue) {
-                        inputOnChange("Qty", productValue);
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    onChanged: (productValue) {
-                      inputOnChange("UnitPrice", productValue);
-                    },
-                    decoration: appInputDecoration("Unit Price"),
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    onChanged: (productValue) {
-                      inputOnChange("TotalPrice", productValue);
-                    },
-                    decoration: appInputDecoration("Total Price"),
-                  ),
-                  const SizedBox(height: 20),
-                  Container(
-                    child: ElevatedButton(
-                      style: appButtonStyle(),
-                      onPressed: () {
-                        formOnSubmit();
-                      },
-                      child: buttonChild("Created"),
-                    ),
-                  )
-                ],
-              ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  onChanged: (productValue) {
+                    inputOnChange("UnitPrice", productValue);
+                  },
+                  decoration: appInputDecoration("Unit Price"),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  onChanged: (productValue) {
+                    inputOnChange("TotalPrice", productValue);
+                  },
+                  decoration: appInputDecoration("Total Price"),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: appButtonStyle(),
+                  onPressed: () {
+                    formOnSubmit();
+                  },
+                  child: buttonChild("Created"),
+                )
+              ],
             ),
           ),
         ],

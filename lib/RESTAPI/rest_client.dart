@@ -50,3 +50,20 @@ Future<bool> productDeleteRequest(id) async{
     return false;
   }
 }
+
+/*UPDATE Request*/
+Future<bool> productUpdateRequest(formValues, id) async{
+  Uri url = Uri.parse("https://crud.teamrabbil.com/api/v1/UpdateProduct/$id");
+  String postBody = jsonEncode(formValues);
+  Map<String, String> postHeader = {"Content-Type": "application/json"};
+  Response response =  await http.post(url, body: postBody, headers: postHeader);
+  final Map<String, String> decodedResponse = jsonDecode(response.body);
+
+  if(response.statusCode == 200 && decodedResponse["status"] == "success"){
+    successToast("Request success");
+    return true;
+  }else{
+    errorToast("Request fail! Try again");
+    return false;
+  }
+}
