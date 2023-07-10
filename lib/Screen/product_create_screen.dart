@@ -19,6 +19,8 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
     "UnitPrice": ""
   };
 
+  bool isLoading = false;
+
   inputOnChange(productKey, productValue) {
     formValues.update(productKey, (value) => productValue);
     if (mounted) {
@@ -46,7 +48,13 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
       errorToast("Unit Price must be required");
     }
     else{
+      setState(() {
+        isLoading = true;
+      });
       await productCreateRequest(formValues);
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -59,7 +67,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
       body: Stack(
         children: [
           backgroundScreen(context),
-          Container(
+          isLoading ? const Center(child: CircularProgressIndicator()): Container(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
               child: Column(
