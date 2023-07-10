@@ -3,6 +3,7 @@ import 'package:crud_with_rest_api_in_flutter/Style/style.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
+/*GET Request*/
 Future<List> productGetRequest() async{
   Uri url = Uri.parse("https://crud.teamrabbil.com/api/v1/ReadProduct");
   Response response = await http.get(url);
@@ -17,6 +18,7 @@ Future<List> productGetRequest() async{
   }
 }
 
+/*POST Request*/
 Future<bool> productCreateRequest(formValues) async{
   Uri url = Uri.parse("https://crud.teamrabbil.com/api/v1/CreateProduct");
   String postBody = jsonEncode(formValues);
@@ -29,6 +31,22 @@ Future<bool> productCreateRequest(formValues) async{
     return true;
   }else{
     errorToast("Request fail! Try again");
+    return false;
+  }
+}
+
+/*DELETE Request*/
+Future<bool> productDeleteRequest(id) async{
+  Uri url = Uri.parse("https://crud.teamrabbil.com/api/v1/DeleteProduct/$id");
+  Response response = await http.get(url);
+
+  final decodedResponse = jsonDecode(response.body);
+
+  if(response.statusCode == 200 && decodedResponse["status"] == "success"){
+    successToast("Request Success");
+    return true;
+  }else{
+    errorToast("Request fail! try again");
     return false;
   }
 }

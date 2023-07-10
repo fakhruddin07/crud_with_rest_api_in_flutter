@@ -29,6 +29,36 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
     setState(() {});
   }
 
+  deleteData(id) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("DELETE!"),
+          content: const Text("Do you want to delete it?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("No"),
+            ),
+            TextButton(
+              onPressed: () async{
+                Navigator.pop(context);
+                isLoading= true;
+                setState(() {});
+                await productDeleteRequest(id);
+                await callData();
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +111,10 @@ class _ProductGridViewScreenState extends State<ProductGridViewScreen> {
                                       ),
                                       const SizedBox(width: 5),
                                       OutlinedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          deleteData(
+                                              productsList[index]["_id"]);
+                                        },
                                         child: const Icon(
                                           Icons.delete,
                                           size: 18,
