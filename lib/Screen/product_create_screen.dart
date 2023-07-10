@@ -9,21 +9,42 @@ class ProductCreateScreen extends StatefulWidget {
 }
 
 class _ProductCreateScreenState extends State<ProductCreateScreen> {
-
   Map<String, String> formValues = {
-    "Img":"",
-    "ProductCode":"",
-    "ProductName":"",
-    "Qty":"",
-    "TotalPrice":"",
-    "UnitPrice":""
+    "Img": "",
+    "ProductCode": "",
+    "ProductName": "",
+    "Qty": "",
+    "TotalPrice": "",
+    "UnitPrice": ""
   };
 
-  inputOnChange(productKey, productValue){
+  inputOnChange(productKey, productValue) {
     formValues.update(productKey, (value) => productValue);
-    if(mounted){
+    if (mounted) {
       setState(() {});
     }
+  }
+
+  formOnSubmit() {
+    if (formValues["Img"]!.trim().isEmpty) {
+      errorToast("Image must be required");
+    }
+    else if (formValues["ProductCode"]!.trim().isEmpty) {
+      errorToast("Product Code must be required");
+    }
+    else if (formValues["ProductName"]!.trim().isEmpty) {
+      errorToast("Product Name must be required");
+    }
+    else if (formValues["Qty"]!.trim().isEmpty) {
+      errorToast("Product Qty must be required");
+    }
+    else if (formValues["TotalPrice"]!.trim().isEmpty) {
+      errorToast("Total Price must be required");
+    }
+    else if (formValues["UnitPrice"]!.trim().isEmpty) {
+      errorToast("Unit Price must be required");
+    }
+    else{}
   }
 
   @override
@@ -108,11 +129,12 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                     decoration: appInputDecoration("Total Price"),
                   ),
                   const SizedBox(height: 20),
-
                   Container(
                     child: ElevatedButton(
                       style: appButtonStyle(),
-                      onPressed: () {},
+                      onPressed: () {
+                        formOnSubmit();
+                      },
                       child: buttonChild("Created"),
                     ),
                   )
