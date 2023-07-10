@@ -1,3 +1,4 @@
+import 'package:crud_with_rest_api_in_flutter/RESTAPI/rest_client.dart';
 import 'package:crud_with_rest_api_in_flutter/Style/style.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
     }
   }
 
-  formOnSubmit() {
+  formOnSubmit() async {
     if (formValues["Img"]!.trim().isEmpty) {
       errorToast("Image must be required");
     }
@@ -44,7 +45,9 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
     else if (formValues["UnitPrice"]!.trim().isEmpty) {
       errorToast("Unit Price must be required");
     }
-    else{}
+    else{
+      await productCreateRequest(formValues);
+    }
   }
 
   @override
